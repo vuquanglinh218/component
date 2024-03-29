@@ -1,0 +1,21 @@
+#__next-prerender-indicator {
+  display: none;
+}
+html * {
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, 'Segoe UI', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+}
+input {
+  -webkit-appearance: textfield !important;
+}
+html {
+  -webkit-text-size-adjust: none;
+  touch-action: none;
+}
+body {
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: auto;
+}
