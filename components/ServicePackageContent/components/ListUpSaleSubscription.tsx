@@ -2,7 +2,10 @@ import { Box, Button, Card, Grid, Theme, Typography, createStyles, makeStyles } 
 import { ContactPopup, Container } from 'components';
 import { TypeAction, listUpSale } from '../data/listUpsale';
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGetListStore, useGetStore, useGetUserWithDomain } from 'swr_api';
+import { currentDomainSlice, useAppSelector } from 'redux/store';
+import { useRouter } from 'next/router';
 
 interface UpSaleSubscriptionItemProps {
   name: string;
@@ -50,6 +53,11 @@ function UpSaleSubscriptionItem(props: UpSaleSubscriptionItemProps) {
 function ListUpSaleSubscription() {
   const { t } = useTranslation('common');
   const [isOpenContactPopup, setIsOpenContactPopup] = useState<boolean>(false);
+  const router = useRouter();
+  const { domain } = router.query;
+
+  const { dataStore } = useGetStore(domain as string);
+  const { dataUserWithDomain } = useGetUserWithDomain(domain as string);
 
   const handleCloseContactPopup = () => {
     setIsOpenContactPopup(false);
@@ -104,7 +112,8 @@ function ListUpSaleSubscription() {
       <ContactPopup
         open={isOpenContactPopup}
         onClose={handleCloseContactPopup}
-        staffInfo={{ name: 'Nguyễn Bảo Anh', phoneNumber: '0984 557 489' }}
+        staffInfo={dataUserWithDomain}
+        tag={dataStore?.tag}
       />
     </Container>
   );

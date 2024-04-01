@@ -13,6 +13,8 @@ import clsx from 'clsx';
 import { Service } from '../data/retail';
 import DoneIcon from 'components/icons/DoneIcon';
 import RenewalHeaderItem from './RenewalHeaderItem';
+import { useRouter } from 'next/router';
+import { useSaleOrderTemplate } from 'swr_api';
 
 const useStylesTable = makeStyles(
   createStyles({
@@ -53,6 +55,10 @@ interface RenewalTableProps {
 function RenewalTable(props: RenewalTableProps) {
   const { data, numberColumnCompare = 4 } = props;
   const classes = useStylesTable();
+  const router = useRouter();
+  const { categoryId, domain } = router.query;
+
+  const { dataSaleOrderTemplate } = useSaleOrderTemplate(categoryId as string);
 
   const handleRenderContentCell = (content: string | Service) => {
     switch (content) {
@@ -78,6 +84,21 @@ function RenewalTable(props: RenewalTableProps) {
     }
   };
 
+  const handleRenewal = (service: Service) => {
+    console.log(service.product_name);
+    if (dataSaleOrderTemplate) {
+      const groupSaleOrderTemplate = dataSaleOrderTemplate.filter((item) => {
+        return item.product_name === service.product_name && item.order_type === service.order_type;
+      });
+
+      router.push(
+        `/stores/service-package-payment?Ids=${groupSaleOrderTemplate
+          .map((item) => item.sale_order_template_id)
+          .join(',')}&domain=${domain}`,
+      );
+    }
+  };
+
   const handleRenderHeader = (numberColumn: number, dataHeader: Service[]) => {
     return [...new Array(numberColumn).keys()].map((_, index) => {
       if (index === 0) {
@@ -94,7 +115,11 @@ function RenewalTable(props: RenewalTableProps) {
       if (index > 0 && index < dataHeader?.length)
         return (
           <TableCell key={index} classes={{ root: clsx(classes.cell, classes.cellNoPadding) }}>
-            <RenewalHeaderItem {...(dataHeader[index] as Service)} color={handleRenderColor(index)} />
+            <RenewalHeaderItem
+              {...(dataHeader[index] as Service)}
+              color={handleRenderColor(index)}
+              onClick={() => handleRenewal(dataHeader[index] as Service)}
+            />
           </TableCell>
         );
     });

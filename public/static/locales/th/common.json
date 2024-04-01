@@ -1,0 +1,148 @@
+{
+  "pageTitle": "บัญชี Sapo",
+  "account": {
+    "title": "ข้อมูลบัญชี",
+    "detailText": "ข้อมูลพื้นฐานของบัญชีเข้าสู่ระบบ",
+    "detail": {
+      "info": {
+        "update": "แก้ไขข้อมูลบัญชี",
+        "fullName": "ชื่อนามสกุล",
+        "phoneNumber": "หมายเลขโทรศัพท์",
+        "phoneNumberMin": "เบอร์โทร",
+        "email": "อีเมล์",
+        "dob": "วันเกิด",
+        "language": "Language-th",
+        "languageOptions": {
+          "vi": "Vietnamese-th",
+          "en": "English-th",
+          "th": "Thailandese-th"
+        },
+        "gender": "เพศ",
+        "genderOptions": {
+          "male": "ชาย",
+          "female": "หญิง",
+          "other": "อื่น"
+        },
+        "area": "พื้นที่",
+        "selectArea": "เลือกภูมิภาค",
+        "chooseCityDistrict": "เลือกจังหวัดและอำเภอ",
+        "ward": "แขวง/ตำบล",
+        "chooseWard": "เลือกแขวง/ตำบล",
+        "chooseWard2": "เลือกแขวง/ตำบล",
+        "address": "ที่อยู่",
+        "addressDetail": "รายละเอียดที่อยู่"
+      },
+      "valid": {
+        "fullNameMustNotBeNull": "ชื่อนามสกุลต้องไม่ได้ว่างเปล่า",
+        "fullNameOverLength": "ชื่อนามสกุลต้องมีความยาวไม่เกิน 250 อักขระ",
+        "emailMusNotBeEmpty": "อีเมลต้องไม่ได้ว่างเปล่า",
+        "phoneNumberMusNotBeEmpty": "หมายเลขโทรศัพท์ต้องไม่เว้นว่าง",
+        "emailInvalid": "อีเมลไม่อยู่ในรูปแบบที่ถูกต้อง",
+        "phoneNumberDigits": "หมายเลขโทรศัพท์ต้องอยู่ระหว่าง 8-25 หมายเลข",
+        "phoneNumberStartWithZero": "หมายเลขโทรศัพท์ต้องขึ้นต้นด้วยเลข 0",
+        "addressOverLength": "ที่อยู่ต้องมีความยาวไม่เกิน 250 อักขระ"
+      },
+      "changePassword": {
+        "title": "เปลี่ยนรหัสผ่าน",
+        "passwordAccountAuthenticated": "รหัสผ่านบัญชีกำลังเข้าสู่ระบบ",
+        "currentPassword": "ป้อนรหัสผ่านปัจจุบัน",
+        "currentPassword2": "ป้อนรหัสผ่านปัจจุบัน",
+        "phoneNumber": "หมายเลขโทรศัพท์",
+        "newPassword": "รหัสผ่านใหม่",
+        "typeNewPassword": "ป้อนรหัสผ่านใหม่",
+        "retypeNewPassword": "ป้อนรหัสผ่านใหม่อีกครั้ง",
+        "note": {
+          "title": "หมายเหตุ",
+          "passwordChangeNote1": "รหัสผ่านต้องเป็นไปตามเงื่อนไขต่อไปนี้",
+          "passwordChangeNote2": "รหัสผ่านมีอย่างน้อย 8 ตัวอักษรขึ้นไป",
+          "passwordChangeNote3": "มีอย่างน้อยตัวเลข 1 ตัว ตัวอักษร 1 ตัว และ อักขระพิเศษ 1 ตัว",
+          "passwordChangeNote4": "รหัสผ่านไม่ได้ซ้ำกันกับ 4 ครั้งล่าสุด"
+        },
+        "valid": {
+          "passwordMustNotBeBlank": "รหัสผ่านต้องไม่ได้ว่างเปล่า",
+          "passwordNotMatch": "ข้อมูลการยืนยันไม่ถูกต้อง",
+          "passwordInvalid": "รหัสผ่านใหม่ไม่ถูกต้อง",
+          "retypePasswordMustNotBeBlank": "การยืนยันรหัสผ่านต้องไม่ได้ว่างเปล่า",
+          "retypePasswordInvalid": "รหัสผ่านไม่ตรงกัน"
+        },
+        "error": {
+          "newPasswordExist": "รหัสผ่านไม่ได้ซ้ำกับรหัสผ่านของ 4 ครั้งล่าสุด",
+          "unauthorized": "ข้อมูลการยืนยันไม่ถูกต้อง",
+          "newPasswordNotValid": "รหัสผ่านใหม่ไม่ถูกต้อง"
+        }
+      }
+    }
+  },
+  "connectSocial": {
+    "title": "เชื่อมโยงกับบัญชี",
+    "titleMobile": "บัญชีที่เชื่อมต่อ",
+    "detailText": "ข้อมูลบัญชี Facebook, Google และ Apple ที่เชื่อมโยงกับบัญชี Sapo ของคุณรองรับการเข้าสู่ระบบด้วยหลายวิธี",
+    "detailTextMobile": "ข้อมูลบัญชี Facebook, Google และ Apple ที่เชื่อมโยงกับบัญชี Sapo ของคุณรองรับการเข้าสู่ระบบด้วยหลายวิธี",
+    "action": {
+      "removeSocialLinkedSuccess": "ยกเลิกการเชื่อมโยงบัญชีสำเร็จ",
+      "removeSocial": "ยกเลิกการเชื่อมโยง",
+      "removeWithSocial": "ยกเลิกการเชื่อมโยงบัญชีของคุณ",
+      "linkWithAccount": "เชื่อมโยงกับบัญชี",
+      "linkWithAccountShort": "ลิงค์",
+      "confirmRemoveSocialFacebook": "คุณแน่ใจว่าจะยกเลิกการเชื่อมโยง Facebook กับบัญชี Sapo ของคุณหรือไม่ การดำเนินการนี้ไม่สามารถยกเลิกได้",
+      "confirmRemoveSocialGoogle": "คุณแน่ใจว่าจะยกเลิกการเชื่อมโยง Google กับบัญชี Sapo ของคุณหรือไม่ การดำเนินการนี้ไม่สามารถยกเลิกได้",
+      "confirmRemoveSocialApple": "คุณแน่ใจว่าจะยกเลิกการเชื่อมโยง Apple กับบัญชี Sapo ของคุณหรือไม่ การดำเนินการนี้ไม่สามารถยกเลิกได้",
+      "accountWithoutLinkFacebook": "บัญชี Sapo ของคุณยังไม่ได้เชื่อมโยงกับ Facebook",
+      "accountWithoutLinkSocialShort": "ยังไม่ได้เชื่อมโยง",
+      "accountWithoutLinkGoogle": "บัญชี Sapo ของคุณยังไม่ได้เชื่อมโยงกับ Google",
+      "accountWithoutLinkApple": "บัญชี Sapo ของคุณยังไม่ได้เชื่อมโยงกับ Apple"
+    }
+  },
+  "notification": {
+    "social": {
+      "linkedOtherAccount": "บัญชีที่คุณเลือกได้เชื่อมโยงกับบัญชี Sapo อื่นแล้ว",
+      "linkedSuccessful": "เชื่อมโยงกับบัญชีสำเร็จ"
+    },
+    "updateInformation": {
+      "success": "อัปเดตข้อมูลสำเร็จ",
+      "fail": "อัปเดตข้อมูลไม่สำเร็จ"
+    },
+    "leavePage": "คุณต้องการออกจากหน้านี้ไหม จากนั้นการแก้ไขทั้งหมดของคุณจะไม่ได้บันทึก?",
+    "updatePassword": {
+      "success": "อัปเดตรหัสผ่านสำเร็จ",
+      "fail": "อัปเดตรหัสผ่านไม่สำเร็จ"
+    }
+  },
+  "action": {
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
+    "exit": "ออก",
+    "logout": "ออกจากระบบ",
+    "finish": "เสร็จสิ้น",
+    "search": "ค้นหา"
+  },
+  "store": {
+    "title": "ร้านค้า",
+    "detail": {
+      "accessingStore": "กำลังเข้าถึง {{store}}",
+      "accessing": "กำลังเข้าถึง",
+      "accessStore": "เข้าไปร้านค้า",
+      "accessTo": "เข้าถึง",
+      "listStore": "รายชื่อร้านค้า",
+      "storeSetup": "ตัวเลือกการแสดงผล",
+      "selectStore": "เลือกร้านค้าที่เข้าถึง",
+      "hiddenStore": "{{hiddenTenants}} ร้านค้าได้ซ่อนแล้ว",
+      "description": "เข้าถึงและจัดการร้านค้าที่เชื่อมต่อกับบัญชีเข้าสู่ระบบของคุณและลงทะเบียนเพื่อทดลองใช้บริการใหม่",
+      "tryForFree": "ลงทะเบียนทดลองใช้",
+      "cannotAccessToStore": "บัญชีของคุณยังไม่มีสิทธิเข้าถึงร้านค้าใด ๆ",
+      "tryForFreeLabel": "ลงทะเบียนทดลองใช้บริการ",
+      "fromHere": "ได้ที่นี่"
+    }
+  },
+  "error": {
+    "notFound": "ไม่พบหน้านี้"
+  },
+  "contract": {
+    "title": "Hợp đồng",
+    "detail": {
+      "listContract": "Danh sách hợp đồng",
+      "description": "Thông tin về các Hợp đồng liên kết với tài khoản đang đăng nhập vào hệ thống",
+      "tryForFree": "Đăng ký dịch vụ mới"
+    }
+  }
+}

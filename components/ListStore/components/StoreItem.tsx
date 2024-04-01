@@ -2,22 +2,23 @@ import { Box, Button, Card, Link, Theme, Typography, createStyles, makeStyles } 
 import TrailStore from 'components/icons/TrailStore';
 import clsx from 'clsx';
 import PaidStore from 'components/icons/PaidStore';
-import { Skeleton } from '@material-ui/lab';
-import { Tag } from 'components';
+import { ContactPopup, Tag } from 'components';
 import { TagType } from 'components/SharedComponents/Tag';
 import { useTranslation } from 'next-i18next';
-import { Tenant } from 'services/Model';
+import { Store } from 'services/Model';
+import { useRouter } from 'next/router';
+import StoreItemSkeleton from '../skeletons/StoreItemSkeleton';
+import { useGetUserWithDomain } from 'swr_api';
+import { useState } from 'react';
 
 export enum StoreType {
-  trail = 'TRAIL',
+  trial = 'TRIAL',
   paid = 'PAID',
 }
 
 interface StoreItemProps {
-  disabled?: boolean;
-  type?: StoreType;
   isLoading?: boolean;
-  fieldData?: Tenant;
+  fieldData?: Store;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,7 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
       gap: '8px',
       position: 'relative',
     },
-    disabled: {},
     button: {
       zIndex: 12,
       backgroundColor: 'white',
@@ -48,69 +48,117 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const handleRenderTypeStore = (type: StoreItemProps['type']) => {
-  switch (type) {
-    case StoreType.trail:
-      return <TrailStore />;
-    case StoreType.paid:
-      return <PaidStore />;
+export const handleRenderTag = (tag: string | boolean) => {
+  switch (tag) {
+    case 'Sắp hết hạn':
+      return TagType.aboutToExpire;
+    case 'Hết hạn 30':
+      return TagType.expired;
+    case 'Hết hạn':
+      return TagType.expired;
     default:
-      return <TrailStore />;
+      return TagType.unknown;
   }
 };
 
 function StoreItem(props: StoreItemProps) {
-  const { disabled = false, type, isLoading, fieldData, ...otherProps } = props;
+  const { isLoading, fieldData, ...otherProps } = props;
+  const { domain_name, domain_url, is_trial, action_type, tag } = { ...fieldData };
   const classes = useStyles();
   const { t } = useTranslation('common');
+  const [isOpenContactPopup, setIsOpenContactPopup] = useState<boolean>(false);
+
+  const router = useRouter();
+  const { dataUserWithDomain } = useGetUserWithDomain(action_type === 'Liên hệ' ? domain_url : null);
+
+  const handleExtend = () => {
+    router.push('stores/service-package-information/' + domain_url);
+  };
+
+  const handleContact = () => {
+    setIsOpenContactPopup(true);
+  };
+
+  const handleRenderTypeStore = (isTrial: boolean) => {
+    if (isTrial) {
+      return <TrailStore />;
+    }
+    return <PaidStore />;
+  };
+
+  const handleDisable = (tag: string | boolean) => {
+    if (tag === 'Hết hạn') {
+      return true;
+    }
+    return false;
+  };
+
+  const handleRenderAction = (action: string) => {
+    switch (action) {
+      case 'Gia hạn':
+        return {
+          text: t('store.detail.extend'),
+          action: handleExtend,
+        };
+      case 'Liên hệ':
+        return {
+          text: t('store.detail.contact'),
+          action: handleContact,
+        };
+
+      default:
+        return {
+          text: t('store.detail.contact'),
+          action: handleContact,
+        };
+    }
+  };
+
+  const handleClosePopup = () => {
+    setIsOpenContactPopup(false);
+  };
 
   return (
     <>
       {isLoading ? (
-        <Card variant='outlined' classes={{ root: classes.root }} {...otherProps}>
-          <Box display='flex' justifyContent='space-between' marginBottom='5px'>
-            <Skeleton variant='rect' width={39} height={39} animation='wave' />
-          </Box>
-
-          <Box>
-            <Typography variant='h6'>
-              <Skeleton animation='wave' />
-            </Typography>
-            <Typography variant='body2'>
-              <Skeleton animation='wave' width={220} />
-            </Typography>
-          </Box>
-
-          <Box display='flex' justifyContent='space-between' alignItems='flex-end' height={36}>
-            <Typography variant='body2'>
-              <Skeleton width={120} />
-            </Typography>
-          </Box>
-        </Card>
+        <StoreItemSkeleton />
       ) : (
-        <Card variant='outlined' classes={{ root: clsx(classes.root, disabled && classes.disabled) }} {...otherProps}>
+        <Card variant='outlined' classes={{ root: clsx(classes.root) }} {...otherProps}>
           <Box display='flex' justifyContent='space-between'>
             <Box position='relative' width='fit-content'>
-              {handleRenderTypeStore(type)}
+              {handleRenderTypeStore(is_trial)}
             </Box>
-            <Tag variant='outlined' size='small' status={TagType.expired} />
+            {tag === false ? undefined : <Tag variant='outlined' size='small' status={handleRenderTag(tag)} />}
           </Box>
 
           <Box>
-            <Typography variant='h6'>CN01 - Chi nhánh 137 Huỳnh Thúc Kháng</Typography>
-            <Typography variant='body2'>0978948197.sapo365.net</Typography>
+            <Typography variant='h6'>{domain_name}</Typography>
+            <Typography variant='body2'>{domain_url}</Typography>
           </Box>
 
           <Box display='flex' justifyContent='space-between' alignItems='flex-end' height={36}>
-            <Link variant='body1' href='#'>
+            <Link variant='body1' href={'https://' + domain_url}>
               {t('store.detail.accessStore')}
             </Link>
-            <Button variant='outlined' classes={{ root: classes.button }}>
-              {t('store.detail.contact')}
+            <Button
+              variant='outlined'
+              classes={{ root: classes.button }}
+              onClick={handleRenderAction(action_type).action}
+            >
+              {handleRenderAction(action_type).text}
             </Button>
           </Box>
-          {disabled && <Card classes={{ root: classes.overlay }} />}
+          {handleDisable(tag) && <Card classes={{ root: classes.overlay }} />}
         </Card>
+      )}
+
+      {action_type === 'Liên hệ' && (
+        <ContactPopup
+          open={isOpenContactPopup}
+          onClose={handleClosePopup}
+          staffInfo={dataUserWithDomain}
+          tag={handleRenderTag(tag)}
+        />
       )}
     </>
   );

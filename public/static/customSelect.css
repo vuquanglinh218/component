@@ -1,0 +1,127 @@
+.Select.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+.Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+  font-weight: 500;
+  color: #182537;
+  font-size: 14px;
+  line-height: 34px;
+}
+.Select.is-focused > .Select-control {
+  border: 1px solid #0088ff;
+}
+.Select-menu-outer {
+  margin-top: 3px;
+}
+.VirtualizedSelectDisabledOption,
+.VirtualizedSelectFocusedOption {
+  background: #e6f4ff !important;
+  border-radius: 3px !important;
+  color: #0088ff !important;
+}
+.snackSuccess {
+  background-color: #0088ff;
+}
+input {
+  -webkit-appearance: textfield !important;
+}
+.MuiNativeSelect-select:focus {
+  background-color: #ffffff !important;
+}
+@media screen and (max-width: 599px) {
+  .Select {
+    width: calc(100% + 4px);
+  }
+}
+:root {
+  touch-action: pan-x pan-y;
+  height: 100%;
+  width: 100%;
+}
+@media screen and (max-width: 599px) and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px !important;
+  }
+}
+.editingMain {
+  height: 200px;
+  border-bottom: 0.5px solid #e8eaeb !important;
+  border-top: 0.5px dashed #e8eaeb !important;
+  border-left: unset !important;
+  border-right: unset !important;
+  border-radius: 0 !important;
+}
+.editingToolbar {
+  border-left: unset !important;
+  border-radius: 0 !important;
+  border-right: unset !important;
+  border-top: 0.5px solid #e8eaeb !important;
+}
+#__next-prerender-indicator {
+  display: none;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src:
+    local('Helvetica Neue'),
+    url('/static/font/helveticaneue.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src:
+    local('helveticaneue_bold'),
+    url('/static/font/helveticaneue_bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Helvetica Neue Light';
+  src:
+    local('helveticaneue_light'),
+    url('/static/font/helveticaneue_light.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Helvetica Neue';
+  src:
+    local('helveticaneue_medium'),
+    url('/static/font/helveticaneue_medium.ttf') format('truetype');
+  font-weight: 500;
+}
+a,
+a:hover,
+a:focus,
+a:active {
+  color: #0088ff;
+  text-decoration: none;
+}
+html * {
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, 'Segoe UI', 'Helvetica Neue',
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+}
+input {
+  -webkit-appearance: textfield !important;
+}
+html {
+  -webkit-text-size-adjust: none;
+  touch-action: none;
+}
+body {
+  -webkit-overflow-scrolling: touch;
+  height: -webkit-fill-available;
+  overflow: auto;
+}
+#__next {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

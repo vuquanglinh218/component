@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 export enum TagType {
   expired = 'EXPIRED',
   aboutToExpire = 'ABOUT-TO-EXPIRE',
+  expires30Days = 'EXPIRES-30-DAYS',
   canceled = 'CANCELED',
   completed = 'COMPLETED',
   unknown = 'UNKNOWN',
@@ -22,6 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
             return '#F3F4F5';
           case TagType.aboutToExpire:
             return '#FFFBF2';
+          case TagType.expires30Days:
+            return '#FFFBF2';
           case TagType.canceled:
             return '#FFF6F6';
           case TagType.completed:
@@ -36,6 +39,8 @@ const useStyles = makeStyles((theme: Theme) =>
             return '#747C87';
           case TagType.aboutToExpire:
             return '#FFDF9B';
+          case TagType.expires30Days:
+            return '#FFDF9B';
           case TagType.canceled:
             return '#FFB8B8';
           case TagType.completed:
@@ -49,6 +54,8 @@ const useStyles = makeStyles((theme: Theme) =>
           case TagType.expired:
             return '#747C87';
           case TagType.aboutToExpire:
+            return '#E49C06';
+          case TagType.expires30Days:
             return '#E49C06';
           case TagType.canceled:
             return '#EE4747';
@@ -70,6 +77,8 @@ function Tag(props: TagProps) {
         return t('status.expired');
       case TagType.aboutToExpire:
         return t('status.aboutToExpire');
+      case TagType.expires30Days:
+        return t('status.expires30Days');
       case TagType.canceled:
         return t('status.canceled');
       case TagType.completed:

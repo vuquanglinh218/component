@@ -1,0 +1,273 @@
+{
+  "pageTitle": "Sapo Account",
+  "account": {
+    "title": "Thông tin tài khoản",
+    "detailText": "Các thông tin cơ bản của tài khoản đang đăng nhập hệ thống",
+    "detail": {
+      "info": {
+        "update": "Sửa thông tin tài khoản",
+        "fullName": "Họ và tên",
+        "phoneNumber": "Số điện thoại",
+        "phoneNumberMin": "SĐT",
+        "email": "Email",
+        "dob": "Ngày sinh",
+        "language": "Ngôn ngữ",
+        "languageOptions": {
+          "vi": "Tiếng việt",
+          "en": "Tiếng Anh",
+          "th": "Tiếng Thái"
+        },
+        "gender": "Giới tính",
+        "genderOptions": {
+          "male": "Nam",
+          "female": "Nữ",
+          "other": "Khác"
+        },
+        "area": "Khu vực",
+        "selectArea": "Chọn khu vực",
+        "chooseCityDistrict": "Chọn Tỉnh thành - Quận huyện",
+        "ward": "Phường/Xã",
+        "chooseWard": "Chọn Phường xã",
+        "chooseWard2": "Chọn Phường/ Xã",
+        "address": "Địa chỉ",
+        "addressDetail": "Địa chỉ cụ thể"
+      },
+      "valid": {
+        "fullNameMustNotBeNull": "Họ và tên không được bỏ trống",
+        "fullNameOverLength": "Họ và tên không được lớn hơn 250 ký tự",
+        "emailMusNotBeEmpty": "Email không được để trống",
+        "phoneNumberMusNotBeEmpty": "Số điện thoại không được để trống",
+        "emailInvalid": "Email không đúng định dạng",
+        "phoneNumberDigits": "Số điện thoại phải từ 8-25 số",
+        "phoneNumberStartWithZero": "Số điện thoại phải bắt đầu là số 0",
+        "addressOverLength": "Địa chỉ không được lớn hơn 250 ký tự"
+      },
+      "changePassword": {
+        "title": "Đổi mật khẩu",
+        "passwordAccountAuthenticated": "Mật khẩu tài khoản đang đăng nhập",
+        "currentPassword": "Nhập mật khẩu hiện tại",
+        "currentPassword2": "Mật khẩu hiện tại",
+        "phoneNumber": "Số điện thoại",
+        "newPassword": "Mật khẩu mới",
+        "typeNewPassword": "Nhập mật khẩu mới",
+        "retypeNewPassword": "Nhập lại mật khẩu mới",
+        "note": {
+          "title": "Lưu ý:",
+          "passwordChangeNote1": "Mật khẩu cần thoả mãn các điều kiện sau",
+          "passwordChangeNote2": "- Có độ dài ít nhất 8 ký tự.",
+          "passwordChangeNote3": "- Chứa ít nhất 01 ký tự số, 01 ký tự chữ và 01 ký tự đặc biệt.",
+          "passwordChangeNote4": "- Không được trùng với 4 mật khẩu gần nhất."
+        },
+        "valid": {
+          "passwordMustNotBeBlank": "Mật khẩu không được bỏ trống",
+          "passwordNotMatch": "Thông tin xác thực không chính xác",
+          "passwordInvalid": "Mật khẩu không hợp lệ",
+          "retypePasswordMustNotBeBlank": "Xác nhận mật khẩu không được để trống",
+          "retypePasswordInvalid": "Mật khẩu không khớp"
+        },
+        "error": {
+          "newPasswordExist": "Mật khẩu không được trùng với 4 mật khẩu gần nhất.",
+          "unauthorized": "Thông tin xác thực không chính xác",
+          "newPasswordNotValid": "Mật khẩu mới không hợp lệ."
+        }
+      }
+    }
+  },
+  "connectSocial": {
+    "title": "Liên kết tài khoản",
+    "titleMobile": "Tài khoản liên kết",
+    "detailText": "Thông tin các tài khoản Facebook, Google và Apple đang liên kết với tài khoản Sapo của bạn hỗ trợ đăng nhập bằng nhiều phương thức.",
+    "detailTextMobile": "Thông tin các tài khoản Facebook, Google và Apple đang liên kết với tài khoản Sapo của bạn hỗ trợ đăng nhập Sapo bằng nhiều phương thức.",
+    "action": {
+      "removeSocialLinkedSuccess": "Gỡ liên kết tài khoản thành công",
+      "removeSocial": "Gỡ liên kết",
+      "removeWithSocial": "Gỡ liên kết với tài khoản",
+      "linkWithAccount": "Liên kết tài khoản",
+      "linkWithAccountShort": "Liên kết",
+      "confirmRemoveSocialFacebook": "Bạn có chắc chắn gỡ liên kết Facebook với tài khoản Sapo của bạn. Thao tác này không thể khôi phục.",
+      "confirmRemoveSocialGoogle": "Bạn có chắc chắn gỡ liên kết Google với tài khoản Sapo của bạn. Thao tác này không thể khôi phục.",
+      "confirmRemoveSocialApple": "Bạn có chắc chắn gỡ liên kết Apple với tài khoản Sapo của bạn. Thao tác này không thể khôi phục.",
+      "accountWithoutLinkFacebook": "Tài khoản Sapo của bạn chưa liên kết với Facebook",
+      "accountWithoutLinkSocialShort": "Chưa liên kết",
+      "accountWithoutLinkGoogle": "Tài khoản Sapo của bạn chưa liên kết với Google",
+      "accountWithoutLinkApple": "Tài khoản Sapo của bạn chưa liên kết với Apple"
+    }
+  },
+  "notification": {
+    "social": {
+      "linkedOtherAccount": "Tài khoản bạn chọn đã được liên kết với một tài khoản Sapo khác",
+      "linkedSuccessful": "Liên kết tài khoản thành công"
+    },
+    "updateInformation": {
+      "success": "Cập nhật thông tin thành công",
+      "fail": "Cập nhật thông tin thất bại"
+    },
+    "leavePage": "Bạn có muốn rời trang, mọi chỉnh sửa của bạn sẽ không được lưu lại?",
+    "updatePassword": {
+      "success": "Cập nhật mật khẩu thành công",
+      "fail": "Cập nhật mật khẩu thất bại"
+    }
+  },
+  "action": {
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "exit": "Thoát",
+    "logout": "Đăng xuất",
+    "finish": "Xong",
+    "search": "Tìm kiếm"
+  },
+  "store": {
+    "title": "Cửa hàng",
+    "listStore": "Danh sách cửa hàng",
+    "detail": {
+      "accessingStore": "Đang truy cập: {{store}}",
+      "accessing": "Đang truy cập",
+      "accessStore": "Vào cửa hàng",
+      "accessTo": "Truy cập",
+      "listStore": "Danh sách cửa hàng",
+      "storeSetup": "Tuỳ chọn hiển thị",
+      "selectStore": "Lựa chọn cửa hàng truy cập",
+      "hiddenStore": "{{hiddenTenants}} Cửa hàng đã ẩn",
+      "description": "Truy cập và quản lý các cửa hàng được kết nối với tài khoản đang đăng nhập và đăng ký dùng thử dịch vụ mới.",
+      "tryForFree": "Đăng ký dùng thử",
+      "cannotAccessToStore": "Tài khoản của bạn chưa có quyền truy cập vào cửa hàng nào",
+      "tryForFreeLabel": "Đăng ký dùng thử để trải nghiệm dịch vụ ",
+      "fromHere": "tại đây",
+      "contact": "Liên hệ",
+      "extend": "Gia hạn",
+      "descriptionTitle": "Truy cập và quản lý các cửa hàng được kết nối với tài khoản đăng nhập.",
+      "trial": "Dùng thử",
+      "paid": "Trả phí"
+    },
+    "exception": {
+      "empty": "Danh sách trống"
+    }
+  },
+  "error": {
+    "notFound": "Không tìm thấy trang"
+  },
+  "contract": {
+    "title": "Hợp đồng",
+    "detail": {
+      "listContract": "Danh sách hợp đồng",
+      "description": "Thông tin về các Hợp đồng liên kết với tài khoản đang đăng nhập vào hệ thống",
+      "tryForFree": "Đăng ký dịch vụ mới"
+    }
+  },
+  "status": {
+    "expired": "Hết hạn",
+    "aboutToExpire": "Sắp hết hạn",
+    "expires30Days": "Hết hạn 30 ngày",
+    "canceled": "Đã huỷ",
+    "completed": "Hoàn thành",
+    "unknown": "Không xác định"
+  },
+  "popup": {
+    "paymentSuccess": {
+      "title": "Thanh toán thành công!",
+      "body1": "Giao dịch của bạn đã được thanh toán thành công.",
+      "body2": "Sapo đang xử lý giao dịch & sẽ gửi thông báo sau khi việc gia hạn/",
+      "body3": "nâng cấp hoàn tất qua email ",
+      "body4": "Bạn có thể xem chi tiết tình trạng trong ",
+      "infoPackageService": "thông tin gói dịch vụ"
+    },
+    "termsOfUse": {
+      "title": "Điều khoản & sử dụng thanh toán",
+      "label": "Tôi đồng ý với điều khoản sử dụng & thông tin bảo mật của Sapo",
+      "confirm": "Xác nhận và thanh toán"
+    },
+    "contact": {
+      "body1": "Anh/chị vui lòng liên hệ",
+      "body2": "Chuyên viên tư vấn: ",
+      "body3": "Hoặc tổng đài: ",
+      "body4": "1900 6750",
+      "body5": " để được hỗ trợ"
+    },
+    "QRCode": {
+      "title": "Mở ứng dụng ngân hàng, quét QR để thanh toán",
+      "footer": "Giải pháp được cung cấp trên nền tảng",
+      "expiredMessage": "Mã giao dịch hết hạn sau"
+    },
+    "cancelPayment": {
+      "cancelPayment": "Hủy thanh toán?",
+      "close": "Đóng",
+      "confirmCancel": "Xác nhận hủy",
+      "message": "Quý khách có chắc chắn muốn hủy thanh toán giao dịch này?"
+    },
+    "exception": {
+      "paymentFailed": "Thanh toán không thành công!",
+      "body1": "Đơn hàng chưa được thanh toán do mã QR hết hạn",
+      "body2": "Quý khách vui lòng thanh toán lại"
+    }
+  },
+  "countdown": {
+    "day": "Ngày",
+    "hour": "Giờ",
+    "minute": "Phút",
+    "second": "Giây"
+  },
+  "packageService": {
+    "servicePackageRenewal": "Gia hạn gói dịch vụ",
+    "packageService": "Gói dịch vụ:",
+    "titleOrtherService": "Thông tin gói dịch vụ khác",
+    "extend": "Gia hạn",
+    "byMore": "Mua thêm",
+    "contact": "Liên hệ",
+    "from": "Từ: ",
+    "to": "Đến: ",
+    "usedCapacity": "Đã sử dụng: ",
+    "titleAdditionalService": "Dịch vụ mua thêm",
+    "exception": {
+      "title": "Không tìm thấy dữ liệu thông tin gói dịch vụ",
+      "body1": "Anh chị vui lòng liên hệ tổng đài:",
+      "body2": "để được hỗ trợ"
+    }
+  },
+  "renewalPriceList": {
+    "titleSeeMore": "Xem thêm các gói dịch vụ khác",
+    "applicableFrom2Year": "Áp dụng khi mua gói từ 2 năm",
+    "month": "tháng",
+    "exception": {
+      "dataNotFound": "Không tìm thấy dữ liệu thông tin bảng giá",
+      "systemIsUpgrading": "Hệ thống đang nâng cấp",
+      "body1": "Anh/chị vui lòng liên hệ chuyên viên tư vấn:",
+      "body2": "Hoặc tổng đài:",
+      "body3": "để được hỗ trợ"
+    }
+  },
+  "purchaseHistory": {
+    "code": "Mã đơn hàng",
+    "nameStore": "Cửa hàng",
+    "createDate": "Ngày mua",
+    "transactionContent": "Nội dung giao dịch",
+    "intoMoney": "Thành tiền",
+    "transactionStatus": "Trạng thái giao dịch",
+    "operation": "Thao tác",
+    "time": "Thời gian",
+    "status": "Trạng thái",
+    "save": "Lưu",
+    "download": "Tải xuống",
+    "noElectrolicnoElectrolicContact": "Chưa có hợp đồng điện tử",
+    "display": "Hiển thị",
+    "result": "Kết quả",
+    "noTransactions": "Chưa có giao dịch"
+  },
+  "servicePackagePayment": {
+    "totalPayment": "Tổng tiền thanh toán",
+    "order": "Đơn hàng",
+    "continue": "Tiếp tục",
+    "partnerInformation": "Thông tin khách hàng",
+    "servicePackageInformation": "Thông tin gói dịch vụ",
+    "customerName": "Tên khách hàng",
+    "phoneNumber": "Số điện thoại",
+    "email": "email",
+    "siteName": "Tên site/ID cửa hàng",
+    "month": "tháng",
+    "monthUse": "Tháng sử dụng",
+    "totalDiscount": "Tổng chiết khấu",
+    "refund": "Hoàn trả chuyển đổi",
+    "tax": "Thuế",
+    "initializationFee": "Phí khởi tạo",
+    "gift": "Tặng"
+  }
+}

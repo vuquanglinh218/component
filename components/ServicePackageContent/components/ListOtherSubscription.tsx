@@ -1,10 +1,13 @@
-import { Box, Divider, Theme, Typography, createStyles, makeStyles } from '@material-ui/core';
+import { Box, Divider, Typography, createStyles, makeStyles } from '@material-ui/core';
 import { ContactPopup, Container } from 'components';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 import StorageItem from './StorageItem';
 import LocationItem from './LocationItem';
 import ChannelItem from './ChannelItem';
+import { useGetOtherSubscription, useGetStore, useGetUserWithDomain } from 'swr_api';
+import { useRouter } from 'next/router';
+import { handleRenderTag } from 'components/ListStore/components/StoreItem';
 
 const useStyles = makeStyles(
   createStyles({
@@ -18,6 +21,14 @@ function ListOtherSubscription() {
   const classes = useStyles();
   const { t } = useTranslation('common');
   const [isOpenContactPopup, setIsOpenContactPopup] = useState<boolean>(false);
+  const router = useRouter();
+  const { domain } = router.query;
+
+  const { dataStore, isLoadingStore } = useGetStore(domain as string);
+  const { dataOtherSubscription, isLoadingSubscription, errorOtherSubscription } = useGetOtherSubscription(
+    dataStore?.subscription_id,
+  );
+  const { dataUserWithDomain } = useGetUserWithDomain(dataStore?.domain_url);
 
   const handleCloseContactPopup = () => {
     setIsOpenContactPopup(false);
@@ -68,7 +79,8 @@ function ListOtherSubscription() {
       <ContactPopup
         open={isOpenContactPopup}
         onClose={handleCloseContactPopup}
-        staffInfo={{ name: 'Nguyễn Bảo Anh', phoneNumber: '0984 557 489' }}
+        staffInfo={dataUserWithDomain}
+        tag={handleRenderTag(dataStore?.tag)}
       />
     </Container>
   );

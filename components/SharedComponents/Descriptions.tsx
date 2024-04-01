@@ -1,30 +1,7 @@
 import { Box, BoxProps, Typography } from '@material-ui/core';
 import { ReactNode } from 'react';
 
-const dataDemo = [
-  {
-    label: 'Tên khách hàng',
-    value: 'Nguyễn Bảo Anh',
-  },
-  {
-    label: 'Tên site/ID cửa hàng',
-    value: 'Bejpang2020',
-  },
-  {
-    label: 'Số điện thoại',
-    value: '0981701198',
-  },
-  {
-    label: 'Email',
-    value: 'baoanhnguyen@gmail.com',
-  },
-  {
-    label: 'Địa chỉ',
-    value: '266 Đội Cấn, Phường Liễu Giai, Quận Ba Đình, HN',
-  },
-];
-
-interface DescriptionProps extends BoxProps {
+export interface DescriptionProps extends BoxProps {
   data?: {
     label: string;
     value: string | ReactNode;
@@ -32,7 +9,7 @@ interface DescriptionProps extends BoxProps {
 }
 
 function Descriptions(props: DescriptionProps) {
-  const { data = dataDemo, ...otherProps } = props;
+  const { data, ...otherProps } = props;
 
   return (
     <Box

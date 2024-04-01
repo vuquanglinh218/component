@@ -2,6 +2,7 @@ import { Box, Button, Typography, createStyles, makeStyles } from '@material-ui/
 import { Service } from '../data/retail';
 import { useTranslation } from 'next-i18next';
 import clsx from 'clsx';
+import { NumberUtil } from 'utils/NumberUtil';
 
 const useStyles = makeStyles(
   createStyles({
@@ -63,13 +64,13 @@ function RenewalHeaderItem(props: RenewalHeaderItemProps) {
       <Typography variant='subtitle2'>{product_name}</Typography>
       <Box display='flex' flexDirection='column' alignItems='center' flex={1}>
         <Typography variant='h1'>
-          {product_unit_price}
+          {NumberUtil.formatMoney(product_unit_price)}
           <Typography variant='body2' component='span'>
             /{t('renewalPriceList.month')}
           </Typography>
         </Typography>
         <Typography variant='caption' classes={{ root: clsx(classes.captionLineThrough, classes.caption) }}>
-          {product_lst_price}/{t('renewalPriceList.month')}
+          {NumberUtil.formatMoney(product_lst_price)}/{t('renewalPriceList.month')}
         </Typography>
       </Box>
       {use_period === 24 && (

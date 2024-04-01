@@ -10,17 +10,22 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import clsx from 'clsx';
+import { useTranslation } from 'next-i18next';
+import { NumberUtil } from 'utils/NumberUtil';
 
 interface ServicePackageItemProps {
-  summary: string;
-  promotionDetail?: string[];
   isActive?: boolean;
+  onClick?: () => void;
+  fieldData?: {
+    use_period: number;
+    product_unit_price: number;
+  };
 }
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     active: {
-      borderColor: theme.palette.primary.main,
+      border: `1px solid ${theme.palette.primary.main} !important`,
     },
     rootAccordion: {
       boxShadow: 'none',
@@ -51,23 +56,28 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function ServicePackageItem(props: ServicePackageItemProps) {
-  const { summary, promotionDetail, isActive } = props;
+  const { isActive, onClick, fieldData } = props;
   const classes = useStyles();
+  const { t } = useTranslation('common');
 
   return (
     <Accordion
       classes={{ root: clsx(classes.rootAccordion, isActive && classes.active), rounded: classes.roundedAccordion }}
+      expanded
     >
-      <AccordionSummary classes={{ root: classes.rootAccordionSummary, content: classes.contentAccordionSummary }}>
-        <Radio size='small' checked={true} />
+      <AccordionSummary
+        classes={{ root: classes.rootAccordionSummary, content: classes.contentAccordionSummary }}
+        onClick={onClick}
+      >
+        <Radio size='small' checked={isActive} onClick={onClick} />
         <Typography variant='body1' style={{ flex: 1 }}>
-          {summary}
+          {fieldData?.use_period} {t('servicePackagePayment.monthUse')}
         </Typography>
         <Typography style={{ paddingRight: 12 }}>
           <Typography variant='subtitle1' component='span'>
-            170.000
+            {NumberUtil.formatMoney(fieldData?.product_unit_price)}
           </Typography>
-          /tháng
+          /{t('servicePackagePayment.month')}
         </Typography>
       </AccordionSummary>
       <Divider variant='middle' />

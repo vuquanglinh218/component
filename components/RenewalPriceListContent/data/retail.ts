@@ -1,4 +1,5 @@
 export interface Service {
+  sale_order_template_id: number;
   order_type: string;
   category_name: string;
   use_period: number;

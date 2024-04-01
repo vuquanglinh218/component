@@ -2,16 +2,16 @@ import { Box, Typography, createStyles, makeStyles } from '@material-ui/core';
 import Popup, { PopupProps } from './Popup';
 import LogoSapo from 'components/icons/LogoSapo';
 import { useTranslation } from 'next-i18next';
-import ImageQRTest from './ImageQRTest';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import CancelPaymentPopup from './CancelPaymentPopup';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 
 interface CountdownProps {
   targetDate: Date;
   onExpired: () => Promise<void> | void;
 }
-interface QRCodePopupProps extends PopupProps, CountdownProps {}
+interface QRCodePopupProps extends PopupProps, CountdownProps {
+  imageQR: string;
+}
 
 const useStyles = makeStyles(
   createStyles({
@@ -91,14 +91,14 @@ function Countdown(props: CountdownProps) {
 }
 
 function QRCodePopup(props: QRCodePopupProps) {
-  const { onClose, targetDate, onExpired, ...otherProps } = props;
+  const { onClose, targetDate, onExpired, imageQR, ...otherProps } = props;
   const { t } = useTranslation('common');
 
   return (
     <Popup maxWidth='md' hiddenTitle hiddenAction {...otherProps} onClose={onClose}>
       <Box display='flex' width={300} flexDirection='column' alignItems='center' gridGap={12}>
         <Typography variant='body1'>{t('popup.QRCode.title')}</Typography>
-        <ImageQRTest />
+        <img style={{ objectFit: 'cover', width: '300px' }} src={`data:image/png;base64,${imageQR}`} />
         <Countdown
           // targetDate={new Date(new Date().getTime() + 0.2 * 60000)}
           targetDate={targetDate}

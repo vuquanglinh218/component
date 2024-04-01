@@ -1,0 +1,148 @@
+{
+  "pageTitle": "Sapo Account",
+  "account": {
+    "title": "Account information",
+    "detailText": "The basic information of the account is logged into the system",
+    "detail": {
+      "info": {
+        "update": "Edit account information",
+        "fullName": "Full name",
+        "phoneNumber": "Phone number",
+        "phoneNumberMin": "Phone",
+        "email": "Email",
+        "dob": "Date of birth",
+        "language": "Language",
+        "languageOptions": {
+          "vi": "Vietnamese",
+          "en": "English",
+          "th": "Thailandese"
+        },
+        "gender": "Gender",
+        "genderOptions": {
+          "male": "Male",
+          "female": "Female",
+          "other": "Other"
+        },
+        "area": "Area",
+        "selectArea": "Select region",
+        "chooseCityDistrict": "Select a province or district",
+        "ward": "Wards",
+        "chooseWard": "Select ward commune",
+        "chooseWard2": "Select district/sub-district",
+        "address": "Address",
+        "addressDetail": "Address"
+      },
+      "valid": {
+        "fullNameMustNotBeNull": "Full name must not be blank",
+        "fullNameOverLength": "Full name must not be greater than 250 characters",
+        "emailMusNotBeEmpty": "Email must not be blank",
+        "phoneNumberMusNotBeEmpty": "Phone number must not be blank",
+        "emailInvalid": "Malformed email",
+        "phoneNumberDigits": "Phone number should be between 8-25 numbers",
+        "phoneNumberStartWithZero": "The phone number must start with 0",
+        "addressOverLength": "The address must not be greater than 250 characters"
+      },
+      "changePassword": {
+        "title": "Change password",
+        "passwordAccountAuthenticated": "Account password is logging in",
+        "currentPassword": "Enter current password",
+        "currentPassword2": "Enter current password",
+        "phoneNumber": "Phone number",
+        "newPassword": "New password",
+        "typeNewPassword": "Enter new password",
+        "retypeNewPassword": "Re-enter new password",
+        "note": {
+          "title": "Note:",
+          "passwordChangeNote1": "Passwords must satisfy the following requirements",
+          "passwordChangeNote2": "- Password must be at least 8 characters.",
+          "passwordChangeNote3": "- Contain at least 1 number, 1 letter and 1 special character.",
+          "passwordChangeNote4": "- Do not match the last 4 passwords."
+        },
+        "valid": {
+          "passwordMustNotBeBlank": "Password cannot be empty",
+          "passwordNotMatch": "Verification information is incorrect",
+          "passwordInvalid": "The password is invalid.",
+          "retypePasswordMustNotBeBlank": "Password confirmation must not be blank",
+          "retypePasswordInvalid": "Passwords do not match"
+        },
+        "error": {
+          "newPasswordExist": "The password must not match with the 4 most recent password.",
+          "unauthorized": "Verification information is incorrect",
+          "newPasswordNotValid": "The new password is invalid."
+        }
+      }
+    }
+  },
+  "connectSocial" : {
+    "title": "Link accounts",
+    "titleMobile": "Linked account",
+    "detailText": "Information of the Facebook, Google and Apple accounts associated with your Sapo account support login by many methods.",
+    "detailTextMobile": "Information of the Facebook, Google and Apple accounts associated with your Sapo account support login by many methods.",
+    "action": {
+      "removeSocialLinkedSuccess": "Unlinking account successfully",
+      "removeSocial": "Stop linking",
+      "removeWithSocial": "Stop linking with account",
+      "linkWithAccount": "Link accounts",
+      "linkWithAccountShort": "Link",
+      "confirmRemoveSocialFacebook": "Are you sure to unlink Facebook with your Sapo account. This action cannot be return.",
+      "confirmRemoveSocialGoogle": "Are you sure to unlink Google with your Sapo account. This action cannot be return.",
+      "confirmRemoveSocialApple": "Are you sure to unlink Apple with your Sapo account. This action cannot be return.",
+      "accountWithoutLinkFacebook": "Your Sapo account is not linked to Facebook yet",
+      "accountWithoutLinkSocialShort": "Not linked yet",
+      "accountWithoutLinkGoogle": "Your Sapo account is not linked to Google yet",
+      "accountWithoutLinkApple": "Your Sapo account is not linked to Apple yet"
+    }
+  },
+  "notification": {
+    "social": {
+      "linkedOtherAccount": "The account you choose is already linked to another Sapo account",
+      "linkedSuccessful": "Linking account successfully"
+    },
+    "updateInformation": {
+      "success": "Successfully updated",
+      "fail": "Update information failed"
+    },
+    "leavePage": "Do you want to leave the page, all your edits will not be saved?",
+    "updatePassword": {
+      "success": "Updated password successfully ",
+      "fail": "Password update failed"
+    }
+  },
+  "action": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "exit": "Exit",
+    "logout": "Sign out",
+    "finish": "Finish",
+    "search": "Search"
+  },
+  "store": {
+    "title": "Store",
+    "detail": {
+      "accessingStore": "Accessing: {{store}}",
+      "accessing": "Accessing",
+      "accessStore": "Into store",
+      "accessTo": "Access",
+      "listStore": "List of stores",
+      "storeSetup": "Select display",
+      "selectStore": "Select store",
+      "hiddenStore": "{{hiddenTenants}} hiden store",
+      "description": "Access and manage stores that are connected to your login account and sign up for try a new service.",
+      "tryForFree": "Sign up for a trial account",
+      "cannotAccessToStore": "Your account is not have the authority to access to any store",
+      "tryForFreeLabel": "Sign up for try to experience the service ",
+      "fromHere": "here"
+    }
+  },
+  "error": {
+    "notFound": "This page could not be found."
+  },
+  "contract": {
+    "title": "Hợp đồng",
+    "detail": {
+      "listContract": "Danh sách hợp đồng",
+      "description": "Thông tin về các Hợp đồng liên kết với tài khoản đang đăng nhập vào hệ thống",
+      "tryForFree": "Đăng ký dịch vụ mới"
+    }
+  }
+}

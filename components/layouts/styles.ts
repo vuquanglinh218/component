@@ -141,6 +141,9 @@ const styles = (theme) => {
       borderRadius: '3px',
       display: 'block',
     },
+    mainContainerMarginTopWithNavHeader: {
+      marginTop: '110px',
+    },
     routerMenu: {
       marginLeft: '8px',
       marginRight: '8px',

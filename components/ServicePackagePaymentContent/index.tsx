@@ -2,50 +2,14 @@ import { Box, Grid, createStyles, makeStyles } from '@material-ui/core';
 import PartnerInformation from './components/PartnerInformation';
 import ServicePackageInformation from './components/ServicePackageInformation';
 import Invoice from './components/Invoice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CancelPaymentPopup, LoadingPopup, QRCodePopup, TermsOfUsePopup } from 'components/SharedComponents';
 import ExceptionPopup from 'components/SharedComponents/ExceptionPopup';
-
-function useFakeFetch(url) {
-  const [data, setData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchData = () => {
-    setIsLoading(true);
-    setError(null);
-
-    // Tạo một Promise mới
-    return new Promise((resolve, reject) => {
-      // Giả lập việc gửi request và nhận response sau một khoảng thời gian ngẫu nhiên
-      setTimeout(() => {
-        // Tạo một response giả bằng cách tạo một object
-        const response = {
-          status: 200,
-          data: `Data fetched from ${url}`, // Đây là dữ liệu giả lập
-        };
-
-        // Giả sử nếu status là 200 thì resolve Promise, ngược lại reject
-        if (response.status === 200) {
-          resolve(response); // Trả về response
-        } else {
-          reject(new Error('Failed to fetch data')); // Trả về lỗi nếu request không thành công
-        }
-      }, Math.random() * 3000); // Thời gian ngẫu nhiên từ 0 đến 3 giây
-    })
-      .then((response) => {
-        setData('Hello');
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  return { data, isLoading, error, fetchData };
-}
+import axios from 'axios';
+import { GetSaleOrderTemplate, RequestPaymentBody, SaleOrderTemplate } from 'services/Model';
+import { useRouter } from 'next/router';
+import { useGetPaymentInfo, useGetStore, useSaleOrderTemplate } from 'swr_api';
+import { setSelectedService, useAppDispatch, useAppSelector, open, close, PopupType } from 'redux/store';
 
 const useStyles = makeStyles(
   createStyles({
@@ -56,72 +20,134 @@ const useStyles = makeStyles(
 );
 
 function ServicePackagePaymentContent() {
-  const { isLoading, data, error, fetchData } = useFakeFetch('hdhfu');
   const classes = useStyles();
-  const [isOpenTerms, setIsOpenTerms] = useState<boolean>(false);
-  const [isOpenQR, setIsOpenQR] = useState<boolean>(false);
-  const [isOpenCancel, setIsOpenCancel] = useState<boolean>(false);
-  const [isOpenLoading, setIsOpenLoading] = useState<boolean>(false);
-  const [isOpenException, setIsOpenException] = useState<boolean>(false);
   const [dateExpire, setDateExpire] = useState<Date>(new Date());
+  const [listService, setListService] = useState<GetSaleOrderTemplate[]>([]);
+  const [dataInvoice, setDataInvoice] = useState<SaleOrderTemplate | undefined>();
+  const [orderType, setOrderType] = useState<string | undefined>();
+  const [imageQR, setImageQR] = useState<string>('');
+  const router = useRouter();
+  const { Ids, domain } = router.query;
+
+  const paymentState = useAppSelector((state) => state.paymentState);
+  const paymentPopupState = useAppSelector((state) => state.paymentPopupState);
+
+  const dispatch = useAppDispatch();
+
+  const { dataStore, isLoadingStore } = useGetStore(domain as string);
+  const { dataSaleOrderTemplate, isLoadingSaleOrderTemplate } = useSaleOrderTemplate(
+    dataStore?.product_category_id as string,
+  );
+  const { dataPaymentInfo, isLoadingPaymentInfo } = useGetPaymentInfo(orderType, {
+    subscriptionId: dataStore?.subscription_id,
+    saleOrderTemplateIds: Ids as string,
+  });
+
+  const checkOrderType = (arr: GetSaleOrderTemplate[]) => {
+    if (arr.length > 0) {
+      return arr.every((item) => item.order_type === arr[0].order_type) ? arr[0].order_type : undefined;
+    }
+    return undefined;
+  };
+
+  useEffect(() => {
+    if (dataSaleOrderTemplate) {
+      const IdsArray = (Ids as string).split(',');
+      const listFiltered = dataSaleOrderTemplate.filter((item) => {
+        return IdsArray.includes(item.sale_order_template_id.toString());
+      });
+
+      setOrderType(checkOrderType(listFiltered));
+      setListService(listFiltered);
+    }
+  }, [dataSaleOrderTemplate]);
+
+  useEffect(() => {
+    const service24Month = listService.find((item) => item.use_period === 24);
+    if (service24Month) {
+      dispatch(setSelectedService(service24Month.sale_order_template_id));
+    }
+  }, [listService]);
+
+  useEffect(() => {
+    if (dataPaymentInfo) {
+      const dataInvoice = dataPaymentInfo.find((item) => item.sale_order_template_id === paymentState.selectedService);
+      if (dataInvoice) {
+        setDataInvoice(dataInvoice);
+      }
+    }
+  }, [paymentState, dataPaymentInfo]);
+
+  const handleCreateRequestPayment = async (data: RequestPaymentBody) => {
+    try {
+      const response = await axios({
+        method: 'post',
+        url: '/api/create_request_payment_with_qr',
+        data,
+      });
+      console.log('data create payment', response.data);
+      setImageQR(response.data.result.data.qr_code);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleOpenTerms = () => {
-    setIsOpenTerms(true);
+    dispatch(open(PopupType.TERMS_OF_USE));
   };
+
   const handleCloseTerms = () => {
-    setIsOpenTerms(false);
+    dispatch(close(PopupType.TERMS_OF_USE));
+  };
+
+  const handleOpenQR = () => {
+    dispatch(open(PopupType.QR));
+  };
+
+  const handleCloseQR = () => {
+    dispatch(close(PopupType.QR));
+    dispatch(open(PopupType.CANCEL));
+  };
+
+  const handleCloseCancel = () => {
+    dispatch(close(PopupType.CANCEL));
+    dispatch(open(PopupType.QR));
+  };
+
+  const handleConfirmCancel = () => {
+    dispatch(close(PopupType.CANCEL));
+  };
+
+  const handleOpenLoading = () => {
+    dispatch(open(PopupType.LOADING));
+  };
+
+  const handleCloseLoading = () => {
+    dispatch(close(PopupType.LOADING));
+  };
+
+  const handleExpired = () => {
+    dispatch(close(PopupType.QR));
+    dispatch(open(PopupType.EXCEPTION));
+  };
+
+  const handleCloseException = () => {
+    dispatch(close(PopupType.EXCEPTION));
   };
 
   const handleConfirmTerms = async () => {
     handleCloseTerms();
     handleOpenLoading();
-    await fetchData();
+    await handleCreateRequestPayment({
+      subscription_id: dataStore.subscription_id,
+      sale_order_template_id: paymentState.selectedService,
+      order_type: orderType,
+      amount: dataInvoice?.sale_order_temp_total,
+    });
     handleCloseLoading();
     setDateExpire(new Date(new Date().getTime() + 0.2 * 60000));
     handleCloseTerms();
     handleOpenQR();
-  };
-
-  const handleOpenQR = () => {
-    setIsOpenQR(true);
-  };
-  const handleCloseQR = () => {
-    setIsOpenQR(false);
-    handleOpenCancel();
-  };
-
-  const handleOpenCancel = () => {
-    setIsOpenCancel(true);
-  };
-
-  const handleCloseCancel = () => {
-    setIsOpenCancel(false);
-    handleOpenQR();
-  };
-
-  const handleConfirmCancel = () => {
-    setIsOpenCancel(false);
-  };
-
-  const handleOpenLoading = () => {
-    setIsOpenLoading(true);
-  };
-
-  const handleCloseLoading = () => {
-    setIsOpenLoading(false);
-  };
-
-  const handleExpired = () => {
-    setIsOpenQR(false);
-    handleOpenException();
-  };
-
-  const handleOpenException = () => {
-    setIsOpenException(true);
-  };
-
-  const handleCloseException = () => {
-    setIsOpenException(false);
   };
 
   return (
@@ -130,25 +156,38 @@ function ServicePackagePaymentContent() {
         <Grid item xs>
           <Box display='flex' flexDirection='column' gridGap={16}>
             <PartnerInformation />
-            <ServicePackageInformation />
+            <ServicePackageInformation
+              data={listService}
+              isLoading={isLoadingPaymentInfo || isLoadingStore || isLoadingSaleOrderTemplate}
+            />
           </Box>
         </Grid>
         <Grid item classes={{ root: classes.containerInvoice }}>
-          <Invoice onClick={handleOpenTerms} />
+          <Invoice
+            onClick={handleOpenTerms}
+            data={dataInvoice}
+            isLoading={isLoadingPaymentInfo || isLoadingStore || isLoadingSaleOrderTemplate}
+          />
         </Grid>
       </Grid>
 
       <TermsOfUsePopup
-        open={isOpenTerms}
+        open={paymentPopupState.TERMS_OF_USE}
         onClose={handleCloseTerms}
         siteName='sapo.vn'
         clauseType='extend'
         onConfirm={handleConfirmTerms}
       />
-      <QRCodePopup open={isOpenQR} onClose={handleCloseQR} targetDate={dateExpire} onExpired={handleExpired} />
-      <CancelPaymentPopup open={isOpenCancel} onClose={handleCloseCancel} onConfirm={handleConfirmCancel} />
-      <LoadingPopup open={isOpenLoading} onClose={handleCloseLoading} />
-      <ExceptionPopup open={isOpenException} onClose={handleCloseException} />
+      <QRCodePopup
+        open={paymentPopupState.QR}
+        onClose={handleCloseQR}
+        targetDate={dateExpire}
+        onExpired={handleExpired}
+        imageQR={imageQR}
+      />
+      <CancelPaymentPopup open={paymentPopupState.CANCEL} onClose={handleCloseCancel} onConfirm={handleConfirmCancel} />
+      <LoadingPopup open={paymentPopupState.LOADING} onClose={handleCloseLoading} />
+      <ExceptionPopup open={paymentPopupState.EXCEPTION} onClose={handleCloseException} />
     </Box>
   );
 }

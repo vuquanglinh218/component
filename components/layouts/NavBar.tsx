@@ -29,9 +29,19 @@ import { useTranslation } from 'next-i18next';
 import MenuItem from '../MenuItem/MenuItem';
 import ContractIcon from '../icons/ContractIcon';
 import { NextClientService } from '../../services/NextClientService';
+import NavigationHeader, { NavigationHeaderProps } from './NavigationHeader';
+import HistoryIcon from 'components/icons/HistoryIcon';
 
-function NavBar(props: WithStyles<any> & { window: any; username: string; title: string; hiddenContract?: boolean }) {
-  const { classes, window, username, title, hiddenContract } = props;
+function NavBar(
+  props: WithStyles<any> & {
+    window: any;
+    username: string;
+    title: string;
+    hiddenContract?: boolean;
+    navigationHeaderProps?: NavigationHeaderProps;
+  },
+) {
+  const { classes, window, username, title, hiddenContract, navigationHeaderProps } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -49,11 +59,12 @@ function NavBar(props: WithStyles<any> & { window: any; username: string; title:
         <Divider />
         <MenuItem href='/accounts' prefetch={true} Icon={UserIcon} textKey='account.title' />
         <MenuItem href='/stores' prefetch={true} Icon={StoreIcon} textKey='store.title' />
-        {hiddenContract ? (
+        {/* {hiddenContract ? (
           ''
         ) : (
           <MenuItem href='/contracts' prefetch={true} Icon={ContractIcon} textKey='contract.title' />
-        )}
+        )} */}
+        <MenuItem href='/purchase-history' prefetch={true} Icon={HistoryIcon} textKey='Lịch sử giao dịch' />
       </List>
       <List className={clsx(classes.routerMenu, classes.logoutButton)}>
         <MenuItem
@@ -91,6 +102,7 @@ function NavBar(props: WithStyles<any> & { window: any; username: string; title:
             </Typography>
           </div>
         </Toolbar>
+        {navigationHeaderProps && <NavigationHeader {...navigationHeaderProps} />}
       </AppBar>
       <nav className={classes.drawer} aria-label='mailbox folders'>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
