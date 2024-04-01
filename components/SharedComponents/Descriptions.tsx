@@ -33,6 +33,7 @@ interface DescriptionProps extends BoxProps {
 
 function Descriptions(props: DescriptionProps) {
   const { data = dataDemo, ...otherProps } = props;
+
   return (
     <Box
       {...otherProps}

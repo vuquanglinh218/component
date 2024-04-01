@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 function Container(props: ContainerProps) {
   const { title, variantTitle = 'subtitle2', extra, children, ...otherProps } = props;
   const classes = useStyles();
+
   return (
     <Card classes={{ root: classes.root }} {...otherProps}>
       <Box px='20px' height='60px' display='flex' alignItems='center'>

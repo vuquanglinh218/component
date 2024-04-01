@@ -1,24 +1,74 @@
-import { Button, Checkbox, DialogContentText, makeStyles, Box, FormControlLabel } from '@material-ui/core';
+import { Button, Checkbox, DialogContentText, makeStyles, Box, FormControlLabel, Typography } from '@material-ui/core';
 import Popup, { PopupProps } from './Popup';
 import { UIEventHandler, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 
+const terms = {
+  extend: [
+    'Cảm ơn Quý khách hàng đã tin tưởng lựa chọn sản phẩm của Sapo. Với việc nhấn "Xác nhận và thanh toán" dưới đây, Quý Khách hàng đồng ý gia hạn sử dụng site/ID: SITE_NAME với các nội dung sau:',
+    'Quý khách đã kiểm tra chính xác thông tin site/ID, gói sản phẩm đã lựa chọn, đơn hàng sẽ không được hoàn, hủy và giá trị đơn hàng không được hoàn lại khi không có lỗi từ Sapo.',
+    'Bằng việc xác nhận Đơn đặt hàng này, Khách hàng đồng ý tuân thủ Quy định sử dụng, chính sách bảo mật và các quy định khác tại website Sapo.vn. Mọi hành vi không tuân thủ theo những quy định này đều bị coi là vi phạm hợp đồng.',
+    'Đơn hàng này là 1 phần không tách rời của Hợp đồng đã ký bởi 2 bên, phụ lục (được gửi qua email của Quý khách). Các nội dung tại hợp đồng, phụ lục không bị sửa đổi, bổ sung, mâu thuẫn với đơn hàng này vẫn giữ nguyên hiệu lực.',
+  ],
+  upgrade: [
+    'Cảm ơn Quý khách hàng đã tin tưởng lựa chọn sản phẩm của Sapo. Với việc nhấn "Xác nhận và thanh toán" dưới đây, Quý Khách hàng đồng ý nâng cấp site/ID: SITE_NAME  với các nội dung sau:',
+    'Quý khách đã kiểm tra chính xác thông tin site/ID, gói sản phẩm đã lựa chọn, đơn hàng sẽ không được hoàn, hủy và giá trị đơn hàng không được hoàn lại khi không có lỗi từ Sapo.',
+    'Bằng việc xác nhận Đơn đặt hàng này, Khách hàng đồng ý tuân thủ Quy định sử dụng, chính sách bảo mật và các quy định khác tại website Sapo.vn. Mọi hành vi không tuân thủ theo những quy định này đều bị coi là vi phạm hợp đồng.',
+    'Đơn hàng này là 1 phần không tách rời của Hợp đồng đã ký bởi 2 bên, phụ lục (được gửi qua email của Quý khách). Các nội dung tại hợp đồng, phụ lục không bị sửa đổi, bổ sung, mâu thuẫn với đơn hàng này vẫn giữ nguyên hiệu lực.',
+  ],
+  addons: [
+    'Cảm ơn Quý khách hàng đã tin tưởng lựa chọn sản phẩm của Sapo. Với việc nhấn "Xác nhận và thanh toán" dưới đây, Quý Khách hàng đồng ý mua thêm các tính năng/dịch vụ sử dụng cho site/ID: SITE_NAME với các nội dung sau:',
+    'Quý khách đã kiểm tra chính xác thông tin site/ID, gói sản phẩm, dịch vụ đã lựa chọn, đơn hàng sẽ không được hoàn, hủy và giá trị đơn hàng không được hoàn lại khi không có lỗi từ Sapo.',
+    'Bằng việc xác nhận Đơn đặt hàng này, Khách hàng đồng ý tuân thủ Quy định sử dụng, chính sách bảo mật và các quy định khác tại website Sapo.vn. Mọi hành vi không tuân thủ theo những quy định này đều bị coi là vi phạm hợp đồng.',
+    'Đơn hàng này là 1 phần không tách rời của Hợp đồng đã ký bởi 2 bên, phụ lục (được gửi qua email của Quý khách). Các nội dung tại hợp đồng, phụ lục không bị sửa đổi, bổ sung, mâu thuẫn với đơn hàng này vẫn giữ nguyên hiệu lực.',
+  ],
+};
+
 interface TermsOfUsePopupProps extends PopupProps {
+  siteName: string;
+  clauseType: string;
   onConfirm?: () => Promise<void> | void;
 }
 
 const useStyles = makeStyles({
-  paper: {
-    maxHeight: 'calc(100% - 300px)',
+  dialogContentRoot: {
+    maxHeight: '400px',
+    maxWidth: '700px',
   },
 });
 
 function TermsOfUsePopup(props: TermsOfUsePopupProps) {
-  const { onConfirm, ...otherProps } = props;
-  const [isAgreeToTerms, setIsAgreeToTerms] = useState<boolean>(false);
-  const [haveReadTerms, setHaveReadTerms] = useState<boolean>(false);
+  const { onConfirm, siteName, clauseType, ...otherProps } = props;
   const classes = useStyles();
   const { t } = useTranslation('common');
+  const [isAgreeToTerms, setIsAgreeToTerms] = useState<boolean>(false);
+  const [haveReadTerms, setHaveReadTerms] = useState<boolean>(true);
+
+  const handleRenderContent = (contents: string[], siteName: string) => {
+    return (
+      <Box display='flex' flexDirection='column' gridGap={12}>
+        {contents.map((item, index) => {
+          if (index === 0) {
+            return <Typography>{item.replace('SITE_NAME', siteName)}</Typography>;
+          }
+          return <Typography>{item}</Typography>;
+        })}
+      </Box>
+    );
+  };
+
+  const handleRenderTerms = (type: string) => {
+    switch (type) {
+      case 'extend':
+        return handleRenderContent(terms.extend, siteName);
+      case 'upgrade':
+        return handleRenderContent(terms.upgrade, siteName);
+      case 'addons':
+        return handleRenderContent(terms.addons, siteName);
+      default:
+        return handleRenderContent(terms.extend, siteName);
+    }
+  };
 
   const handleCheckTerms = () => {
     setIsAgreeToTerms(!isAgreeToTerms);
@@ -51,22 +101,15 @@ function TermsOfUsePopup(props: TermsOfUsePopupProps) {
       maxWidth='md'
       title={t('popup.termsOfUse.title')}
       actionElement={DialogAction}
-      className={classes.paper}
       dialogContentProps={{
         onScroll: handleScroll,
+        classes: {
+          root: classes.dialogContentRoot,
+        },
       }}
       {...otherProps}
     >
-      <DialogContentText tabIndex={-1}>
-        {[...new Array(50)]
-          .map(
-            () => `Cras mattis consectetur purus sit amet fermentum.
-                    Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                    Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-          )
-          .join('\n')}
-      </DialogContentText>
+      <DialogContentText tabIndex={-1}>{handleRenderTerms(clauseType)}</DialogContentText>
     </Popup>
   );
 }

@@ -16,7 +16,7 @@ import {
 import MenuClose from 'components/icons/MenuClose';
 import { ReactNode } from 'react';
 
-const DialogTitleStyles = (theme: Theme) =>
+const useDialogTitleStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       margin: 0,
@@ -28,7 +28,8 @@ const DialogTitleStyles = (theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
-  });
+  }),
+);
 
 const usePopupStyles = makeStyles((them: Theme) =>
   createStyles({
@@ -42,9 +43,13 @@ const usePopupStyles = makeStyles((them: Theme) =>
       '&:first-child': {
         paddingTop: 32,
       },
-      minWidth: '500px',
+      minWidth: 500,
+      minHeight: 420,
       display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       justifyContent: 'center',
+      gap: '12px',
     },
   }),
 );
@@ -59,14 +64,16 @@ export interface PopupProps extends Omit<DialogProps, 'onClose'> {
   dialogContentProps?: DialogContentProps;
 }
 
-interface DialogTitleProps extends WithStyles<typeof DialogTitleStyles> {
+interface DialogTitleProps {
   id: string;
   children: React.ReactNode;
   onClose: () => void;
 }
 
-const DialogTitle = withStyles(DialogTitleStyles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...otherProps } = props;
+const DialogTitle = (props: DialogTitleProps) => {
+  const { children, onClose, ...otherProps } = props;
+  const classes = useDialogTitleStyles();
+
   return (
     <MuiDialogTitle disableTypography className={classes.root} {...otherProps}>
       <Typography variant='subtitle1'>{children}</Typography>
@@ -77,7 +84,7 @@ const DialogTitle = withStyles(DialogTitleStyles)((props: DialogTitleProps) => {
       ) : null}
     </MuiDialogTitle>
   );
-});
+};
 
 function Popup(props: PopupProps) {
   const {
@@ -95,7 +102,7 @@ function Popup(props: PopupProps) {
   const classes = usePopupStyles();
 
   return (
-    <Dialog onClose={onClose} aria-labelledby='customized-dialog-title' {...otherProps}>
+    <Dialog onClose={onClose} aria-labelledby='customized-dialog-title' disableBackdropClick {...otherProps}>
       {!hiddenTitle && (
         <DialogTitle id='customized-dialog-title' onClose={onClose}>
           {title}

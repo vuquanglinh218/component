@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function ListStore() {
-  const [status, setStatus] = useState<StoreType>(StoreType.paid);
-  const { t } = useTranslation('common');
   const classes = useStyles();
+  const { t } = useTranslation('common');
+  const [status, setStatus] = useState<StoreType>(StoreType.paid);
 
   const handleFilterTrail = () => {
     setStatus(StoreType.trail);

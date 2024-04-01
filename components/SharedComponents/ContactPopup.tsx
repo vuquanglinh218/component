@@ -14,6 +14,7 @@ interface ContactPopupProps extends PopupProps {
 function ContactPopup(props: ContactPopupProps) {
   const { staffInfo, ...otherProps } = props;
   const { t } = useTranslation('common');
+
   return (
     <Popup hiddenTitle hiddenAction maxWidth='md' {...otherProps}>
       <Box display='flex' flexDirection='column' alignItems='center' width={460} gridGap={4}>

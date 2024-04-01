@@ -7,3 +7,5 @@ export { default as TermsOfUsePopup } from './TermsOfUsePopup';
 export { default as ContactPopup } from './ContactPopup';
 export { default as QRCodePopup } from './QRCodePopup';
 export { default as SearchBar } from './SearchBar';
+export { default as CancelPaymentPopup } from './CancelPaymentPopup';
+export { default as LoadingPopup } from './LoadingPopup';

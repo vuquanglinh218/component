@@ -1,25 +1,26 @@
-import { Box, InputBase, makeStyles, InputBaseProps } from '@material-ui/core';
+import { Box, InputBase, makeStyles, InputBaseProps, createStyles } from '@material-ui/core';
 import GlassIcon from 'components/icons/GlassIcon';
 import clsx from 'clsx';
 
 interface SearchBarProps extends InputBaseProps {}
 
-const useStyles = makeStyles({
-  root: {
-    border: '1px solid #D3D5D7',
-    height: '36px',
-    borderRadius: '6px',
-    padding: '0px 12px',
-  },
+const useStyles = makeStyles(
+  createStyles({
+    root: {
+      border: '1px solid #D3D5D7',
+      height: '36px',
+      borderRadius: '6px',
+      padding: '0px 12px',
+    },
 
-  rootInput: {
-    flex: 1,
-  },
-});
+    rootInput: {
+      flex: 1,
+    },
+  }),
+);
 
 function SearchBar(props: SearchBarProps) {
   const { ...otherProps } = props;
-
   const classes = useStyles();
 
   return (
